@@ -11,6 +11,8 @@ This is the Main Window.
 
 #include "window.h"
 
+LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+
 // Constructor
 
 Window::Window() {
@@ -27,26 +29,6 @@ Window::~Window() {
 
 HWND Window::myWindow() const {
 	return m_Window; 
-}
-
-// We need to put this here before initializeWindow() as C++ "fails" at this sort of things, i mean
-// put it after initializeWindow() and WndProc will be undefined.
-
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-	switch(message) {
-		case WM_CLOSE: {
-			DestroyWindow(hWnd);
-			break;
-		}
-		case WM_DESTROY: {
-			PostQuitMessage(0);
-			break;
-		}
-		default: {
-			return DefWindowProc(hWnd, message, wParam, lParam);
-		}
-	}
-	return 0;
 }
 
 // To create the Window
@@ -103,4 +85,21 @@ bool Window::initializeWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
 		DispatchMessage(&message);
 	}
 	return true;
+}
+
+LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+	switch(message) {
+		case WM_CLOSE: {
+			DestroyWindow(hWnd);
+			break;
+		}
+		case WM_DESTROY: {
+			PostQuitMessage(0);
+			break;
+		}
+		default: {
+			return DefWindowProc(hWnd, message, wParam, lParam);
+		}
+	}
+	return 0;
 }
