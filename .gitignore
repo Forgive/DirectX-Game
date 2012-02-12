@@ -1,0 +1,8 @@
+*.o
+moc_*
+Debug/
+*/Debug
+*.sdf
+*.opensdf
+*.v11.suo
+*/Debug
