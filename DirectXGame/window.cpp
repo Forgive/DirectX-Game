@@ -3,7 +3,7 @@
 Author: Forgive
 Page: www.github.com/Forgive
 Creation Date: 12 - 02 - 2012 (17:08)
-Last Updated: 12 - 02 - 2012 (17:17)
+Last Updated: 13 - 02 - 2012 (00:41)
 
 This is the Main Window.
 
@@ -25,6 +25,14 @@ Window::~Window() {
 
 }
 
+int Window::myWidth() const {
+	return width;
+}
+
+int Window::myHeight() const {
+	return height;
+}
+
 // When we create the Engine, we'll need this.
 
 HWND Window::myWindow() const {
@@ -36,10 +44,9 @@ HWND Window::myWindow() const {
 bool Window::initializeWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 	HWND window;
 	WNDCLASSEX window_class;
-	MSG message;
 
 	window_class.cbSize        = sizeof(WNDCLASSEX);
-	window_class.style		   = CS_DROPSHADOW | CS_HREDRAW | CS_VREDRAW;
+	window_class.style		   = CS_HREDRAW | CS_VREDRAW;
 	window_class.lpfnWndProc   = (WNDPROC)WndProc;
 	window_class.cbClsExtra    = NULL;
 	window_class.cbWndExtra    = NULL;
@@ -56,8 +63,8 @@ bool Window::initializeWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
 		return false;
 	}
 
-	int width = ::GetSystemMetrics(SM_CXSCREEN);
-	int height = ::GetSystemMetrics(SM_CYSCREEN);
+	width = ::GetSystemMetrics(SM_CXSCREEN);
+	height = ::GetSystemMetrics(SM_CYSCREEN);
 
 	window = CreateWindowEx(WS_EX_CLIENTEDGE,
 							L"DirectX Game",
@@ -79,11 +86,6 @@ bool Window::initializeWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
 
 	ShowWindow(window, nCmdShow);
 	UpdateWindow(window);
-
-	while(GetMessage(&message, NULL, 0, 0) > 0) {
-		TranslateMessage(&message);
-		DispatchMessage(&message);
-	}
 	return true;
 }
 

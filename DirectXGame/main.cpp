@@ -3,9 +3,9 @@
 Author: Forgive
 Page: www.github.com/Forgive
 Creation Date: 12 - 02 - 2012 (16:25)
-Last Updated: 12 - 02 - 2012 (17:17)
+Last Updated: 13 - 02 - 2012 (00:40)
 
-This is the graphics engine.
+This is the main stuff.
 
 --------------------------------------------*/
 
@@ -20,6 +20,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	if(!window->initializeWindow(hInstance, hPrevInstance, lpCmdLine, nCmdShow)) {
 		MessageBox(NULL, L"Could not initialize window", L"Initializing Error", MB_ICONERROR | MB_OK);
 		return 0;
+	}
+	MSG message = {0};
+	while(WM_QUIT != message.message) {
+		while(PeekMessage(&message, NULL, 0, 0, PM_REMOVE) == TRUE) {
+			TranslateMessage(&message);
+			DispatchMessage(&message);
+		}
+
+		// Rendering...
 	}
 	return 0;
 }
