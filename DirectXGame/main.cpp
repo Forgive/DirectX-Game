@@ -34,7 +34,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			TranslateMessage(&message);
 			DispatchMessage(&message);
 		}
-		// render stuff. blabla.
+		//Render.
 	}
 	return 0;
 }
