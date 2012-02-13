@@ -11,6 +11,7 @@ This is the main stuff.
 
 #include <Windows.h>
 #include "window.h"
+#include "engine.h"
 
 // Default function called when the application is started.
 
@@ -21,14 +22,19 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		MessageBox(NULL, L"Could not initialize window", L"Initializing Error", MB_ICONERROR | MB_OK);
 		return 0;
 	}
+	Engine *myEngine = new Engine;
+	if(!myEngine->initializeEngine(window->myWindow(), window->myWidth(), window->myHeight())) {
+		MessageBox(NULL, L"Could not initialize the engine", L"Initializing Error", MB_ICONERROR | MB_OK);
+		return 0;
+	}
+
 	MSG message = {0};
 	while(WM_QUIT != message.message) {
 		while(PeekMessage(&message, NULL, 0, 0, PM_REMOVE) == TRUE) {
 			TranslateMessage(&message);
 			DispatchMessage(&message);
 		}
-
-		// Rendering...
+		// render stuff. blabla.
 	}
 	return 0;
 }

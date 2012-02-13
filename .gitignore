@@ -1,8 +1,9 @@
 *.o
 moc_*
 Debug/
-*/Debug
+Release/
 *.sdf
 *.opensdf
 *.v11.suo
 */Debug
+*/Release

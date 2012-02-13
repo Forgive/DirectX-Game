@@ -42,7 +42,6 @@ HWND Window::myWindow() const {
 // To create the Window
 
 bool Window::initializeWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
-	HWND window;
 	WNDCLASSEX window_class;
 
 	window_class.cbSize        = sizeof(WNDCLASSEX);
@@ -66,7 +65,7 @@ bool Window::initializeWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
 	width = ::GetSystemMetrics(SM_CXSCREEN);
 	height = ::GetSystemMetrics(SM_CYSCREEN);
 
-	window = CreateWindowEx(WS_EX_CLIENTEDGE,
+	m_Window = CreateWindowEx(WS_EX_CLIENTEDGE,
 							L"DirectX Game",
 							L"DirectX Game",
 							WS_OVERLAPPEDWINDOW,
@@ -79,13 +78,13 @@ bool Window::initializeWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
 							hInstance,
 							NULL);
 
-	if(window == NULL) {
+	if(m_Window == NULL) {
 		MessageBox(NULL, L"Could not create the window", L"Window Creation Error", MB_ICONERROR | MB_OK);
 		return false;
 	}
 
-	ShowWindow(window, nCmdShow);
-	UpdateWindow(window);
+	ShowWindow(m_Window, nCmdShow);
+	UpdateWindow(m_Window);
 	return true;
 }
 
